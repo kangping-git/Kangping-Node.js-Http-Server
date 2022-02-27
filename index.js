@@ -1,7 +1,6 @@
 const http = require("http")
 const chalk = require("chalk")
 const fs = require("fs")
-const filetype = require('file-type')
 class app{
     constructor(){
         this.listened = false
@@ -23,8 +22,8 @@ class app{
                 return value.url == req.url && value.method == req.method
             })
             res.sendFile = (path) => {
-                let file = fs.writeFileSync(path)
-                res.writeHead(200,{"Content-Type":filetype(file).mime + "; charset=utf-8"})
+                let file = fs.readFileSync(path)
+                res.writeHead(200,{"Content-Type":"charset=utf-8"})
                 res.write(file.toString("utf-8"))
                 res.end()
             }
